@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMeuRepertorio.View.Listagem"
+             Title="Meu Repertório">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Novo" Clicked="ToolbarItem_Clicked_Novo" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+
+            <SearchBar x:Name="txt_busca" 
+                       Placeholder="Busque por uma Música"
+                       TextChanged="txt_busca_TextChanged" />
+
+            <RefreshView x:Name="ref_carregando" IsRefreshing="False" Refreshing="lst_musicas_Refreshing">
+                <ListView x:Name="lst_musicas" ItemSelected="lst_musicas_ItemSelected">
+                    <ListView.Header>
+                        <Grid RowDefinitions="Auto"
+                              ColumnDefinitions="*, Auto" 
+                              Padding="15,5">
+                            <Label Grid.Row="0" Grid.Column="0" Text="TÍTULO" FontSize="15" FontAttributes="Bold"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="TOM" FontSize="15" FontAttributes="Bold"/>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
+                                </ViewCell.ContextActions>
+
+                                <Grid RowDefinitions="Auto"
+                                      ColumnDefinitions="*, Auto"
+                                      Padding="12">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Titulo}" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Tom}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RefreshView>       
+
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
